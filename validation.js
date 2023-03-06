@@ -4,9 +4,9 @@ const v = (Schema) => (payload) => Schema.validate(payload,{abortEarly:false});
 
 const userschema = joi.object({
     fullname:joi.string().required(),
-    email:joi.email().required(),
+    email:joi.string().email().required(),
     username:joi.string().min(5).required(),
-    password:joi.password().min(4).minOfSpecialCharacters(2).required()
+    password:joi.string().min(4).required()
 })
 
 const now = Date.now();

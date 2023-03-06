@@ -1,7 +1,12 @@
+require('dotenv').config()
+
 const express = require('express')
 const router = express.Router()
 const user = require('../model/user');
 const bcrypt = require("bcrypt");
+const jwt = require('jsonwebtoken')
+const role = require('../helper/role')
+const verifyRoles = require('../middleware/verifyroles')
 const validateuser = require('../validation')
 router.get('/login', (req, res) => {
 
@@ -10,15 +15,20 @@ router.get('/login', (req, res) => {
 })
 
 
-router.post('/login', async (req, res) => {
+router.post('/login',verifyRoles(role.user),async (req, res) => {
     
     const username = req.body.username;
     const password = req.body.password;
-    const hashpassword = await bcrypt.hash(password,10)
-    const checkuser = { name: username, password: hashpassword }
-    console.log(user)
-    const access_token = jwt.sign(checkuser, process.env.ACCESS_TOKEN_SECRET)
+    const founduser = await user.findOne({username:username})
+    console.log(founduser);
+    const matchpass = await bcrypt.compare(password,founduser.password)
+    if(!matchpass)
+    {
+        console.log('password worng')
+    }
+    const access_token = jwt.sign({'userinfo':{'username':founduser.username,'password':founduser.password ,'role':founduser.role}}, process.env.ACCESS_TOKEN_SECRET)
     res.json({ access_token: access_token })
+    console.log(access_token);
 })
 
 
@@ -32,6 +42,7 @@ router.post('/register', async (req,res)=>{
     U.email = req.body.email;
     U.password = password;
     console.log(U)
+    await U.save();
 
 })
 module.exports = router

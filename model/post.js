@@ -4,6 +4,7 @@ const post = new mongoose.Schema (
     {
         title:{
             type:String,
+            trim:true,
             required:true,
         },
         user:{
@@ -12,6 +13,7 @@ const post = new mongoose.Schema (
         },
         desc:{
             type:String,
+            trim:true,
         },
         comment:{
             type: mongoose.Schema.Types.ObjectId, 

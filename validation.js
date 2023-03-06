@@ -2,8 +2,11 @@ const joi = require('joi')
 
 const v = (Schema) => (payload) => Schema.validate(payload,{abortEarly:false});
 
-const depatmentschema = joi.object({
-    dname:joi.string().required()
+const userschema = joi.object({
+    fullname:joi.string().required(),
+    email:joi.email().required(),
+    username:joi.string().min(5).required(),
+    password:joi.password().min(4).minOfSpecialCharacters(2).required()
 })
 
 const now = Date.now();
@@ -14,28 +17,12 @@ const empschema = joi.object({
     email:joi.string().email().required(),
     phone:joi.string().min(10).max(10).required(),
     address:joi.string().max(150).required(),
-    dob:joi.date().max(cutoffDate).required().required().error(
-        (errors => {
-            errors.forEach(err => {
-              switch (err.code) {
-                case "any.empty":
-                  err.message = "Value should not be empty!";
-                  break;
-                case "string.max":
-                  err.message = `your age mustbe 18 or more`;
-                  break;
-                default:
-                  break;
-              }
-            });
-            return errors;
-        }),
-    ),
+    dob:joi.date().max(cutoffDate).required().required(),
     photo:joi.string(),
     department:joi.string().required()
 })
 
 
 
-exports.validatedepartment = v(depatmentschema)
+exports.validateuser = v(userschema)
 exports.validateemployee = v(empschema)

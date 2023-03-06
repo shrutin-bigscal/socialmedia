@@ -6,7 +6,7 @@ const app = express()
 const user = require('./router/user')
 app.set("view engine","ejs")
 app.use(express.urlencoded({extended:false}))
-
+// app.use(express.json)
 // app.use("/api/auth", authRoute);
 app.use("/users",user);
 // app.use("/api/posts", postRoute);

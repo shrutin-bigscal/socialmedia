@@ -1,10 +1,10 @@
-const express = require('express');
+// const express = require('express');
 
-const router = express.Router();
+// const router = express.Router();
 
-/* GET home page. */
+// /* GET home page. */
 
-router.get('/user', getAllNews);
-router.get('/post', getAllFilteredNews);
+// router.get('/user', getAllNews);
+// router.get('/post', getAllFilteredNews);
 
-module.exports = router;
+// module.exports = router;

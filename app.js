@@ -3,21 +3,11 @@ const role = require('./helper/role')
 const auth = require('./helper/auth')
 const express = require('express')
 const app = express()
+const user = require('./router/user')
 app.set("view engine","ejs")
 app.use(express.urlencoded({extended:false}))
 
-
-app.get('/login',(req,res)=>{
-
-    res.render("login.ejs")    
-
-})
-app.post('/login',(req,res)=>{
-
-    
-    console.log(req.body)
-    // res.render("login.ejs")    
-
-})
-
+// app.use("/api/auth", authRoute);
+app.use("/users",user);
+// app.use("/api/posts", postRoute);
 app.listen(3030)

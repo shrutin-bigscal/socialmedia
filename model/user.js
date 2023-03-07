@@ -47,9 +47,8 @@ const user = new mongoose.Schema (
             type:Date
         },
         role:{
-            type:String,
-            default:'user',
-            enum:['user','admin']
+            type: mongoose.Schema.Types.ObjectId, 
+            ref: 'role'
         }
     }
 )

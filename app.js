@@ -1,4 +1,5 @@
 require('./db/conn')
+require('dotenv').config()
 const role = require('./helper/role')
 const auth = require('./helper/auth')
 const express = require('express')
@@ -10,4 +11,4 @@ app.use(express.urlencoded({extended:false}))
 // app.use("/api/auth", authRoute);
 app.use("/users",user);
 // app.use("/api/posts", postRoute);
-app.listen(3030)
+app.listen(process.env.PORT || 3030 )

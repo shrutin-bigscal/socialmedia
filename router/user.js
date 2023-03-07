@@ -10,6 +10,7 @@ const role = require('../model/role')
 const verifyRoles = require('../middleware/verifyroles')
 const verifyJWT = require('../middleware/verifyjwt')
 const validateuser = require('../validation');
+const { access } = require('fs');
 
 router.get('/login', async (req, res) => {
 
@@ -37,14 +38,21 @@ router.post('/login', async (req, res) => {
         });
     }
     const access_token = jwt.sign({ 'userinfo': { 'username': founduser.username, 'password': founduser.password, 'role': founduser.role.role } }, process.env.ACCESS_TOKEN_SECRET)
-    res.json({ access_token: access_token })
+    // // res.cookie("access_token", access_token, {
+    // //   httpOnly: true,
+    // // }).redirect('/users') 
+    res.json({Bearer : access_token})
+
+
 })
 
-router.get('/edit', verifyJWT, (req, res) => {
-    console.log(req.username)
+router.get('/edit',verifyJWT,verifyRoles(user),(req, res) => {  
+    res.send('hello world')
 })
 
-
+router.get('/',(req,res)=>{
+    res.sendStatus(200)
+})
 router.post('/register', async (req, res) => {
 
     var valid;

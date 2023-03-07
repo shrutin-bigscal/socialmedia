@@ -1,27 +1,24 @@
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css" />
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <!------ Include the above in your HEAD tag ---------->
 <script>
     $(function () {
-
-        $('#login-form-link').click(function (e) {
+        $("#login-form-link").click(function (e) {
             $("#login-form").delay(100).fadeIn(100);
             $("#register-form").fadeOut(100);
-            $('#register-form-link').removeClass('active');
-            $(this).addClass('active');
+            $("#register-form-link").removeClass("active");
+            $(this).addClass("active");
             e.preventDefault();
         });
-        $('#register-form-link').click(function (e) {
+        $("#register-form-link").click(function (e) {
             $("#register-form").delay(100).fadeIn(100);
             $("#login-form").fadeOut(100);
-            $('#login-form-link').removeClass('active');
-            $(this).addClass('active');
+            $("#login-form-link").removeClass("active");
+            $(this).addClass("active");
             e.preventDefault();
         });
-
     });
-
 </script>
 <style>
     body {
@@ -63,10 +60,22 @@
         clear: both;
         border: 0;
         height: 1px;
-        background-image: -webkit-linear-gradient(left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0));
-        background-image: -moz-linear-gradient(left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0));
-        background-image: -ms-linear-gradient(left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0));
-        background-image: -o-linear-gradient(left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0));
+        background-image: -webkit-linear-gradient(left,
+                rgba(0, 0, 0, 0),
+                rgba(0, 0, 0, 0.15),
+                rgba(0, 0, 0, 0));
+        background-image: -moz-linear-gradient(left,
+                rgba(0, 0, 0, 0),
+                rgba(0, 0, 0, 0.15),
+                rgba(0, 0, 0, 0));
+        background-image: -ms-linear-gradient(left,
+                rgba(0, 0, 0, 0),
+                rgba(0, 0, 0, 0.15),
+                rgba(0, 0, 0, 0));
+        background-image: -o-linear-gradient(left,
+                rgba(0, 0, 0, 0),
+                rgba(0, 0, 0, 0.15),
+                rgba(0, 0, 0, 0));
     }
 
     .panel-login input[type="text"],
@@ -90,7 +99,7 @@
     }
 
     .btn-login {
-        background-color: #59B2E0;
+        background-color: #59b2e0;
         outline: none;
         color: #fff;
         font-size: 14px;
@@ -98,14 +107,14 @@
         font-weight: normal;
         padding: 14px 0;
         text-transform: uppercase;
-        border-color: #59B2E6;
+        border-color: #59b2e6;
     }
 
     .btn-login:hover,
     .btn-login:focus {
         color: #fff;
-        background-color: #53A3CD;
-        border-color: #53A3CD;
+        background-color: #53a3cd;
+        border-color: #53a3cd;
     }
 
     .forgot-password {
@@ -128,14 +137,14 @@
         font-weight: normal;
         padding: 14px 0;
         text-transform: uppercase;
-        border-color: #1CB94A;
+        border-color: #1cb94a;
     }
 
     .btn-register:hover,
     .btn-register:focus {
         color: #fff;
-        background-color: #1CA347;
-        border-color: #1CA347;
+        background-color: #1ca347;
+        border-color: #1ca347;
     }
 </style>
 <div class="container">
@@ -151,30 +160,30 @@
                             <a href="#" id="register-form-link">Register</a>
                         </div>
                     </div>
-                    <hr>
+                    <hr />
                 </div>
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-lg-12">
                             <form id="login-form" action="/users/login" method="post" role="form"
-                                style="display: block;">
+                                style="display: block">
                                 <div class="form-group">
                                     <input type="text" name="username" id="username" tabindex="1" class="form-control"
-                                        placeholder="Username" value="" >
+                                        placeholder="Username" value="" />
                                 </div>
                                 <div class="form-group">
                                     <input type="password" name="password" id="password" tabindex="2"
-                                        class="form-control" placeholder="Password">
+                                        class="form-control" placeholder="Password" />
                                 </div>
                                 <div class="form-group text-center">
-                                    <input type="checkbox" tabindex="3" class="" name="remember" id="remember">
+                                    <input type="checkbox" tabindex="3" class="" name="remember" id="remember" />
                                     <label for="remember"> Remember Me</label>
                                 </div>
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-sm-6 col-sm-offset-3">
                                             <input type="submit" name="login-submit" id="login-submit" tabindex="4"
-                                                class="form-control btn btn-login" value="Log In">
+                                                class="form-control btn btn-login" value="Log In" />
                                         </div>
                                     </div>
                                 </div>
@@ -189,33 +198,42 @@
                                     </div>
                                 </div>
                             </form>
-                            <form id="register-form" action="/register" method="post"
-                                role="form" style="display: none;">
+                            <form id="register-form" action="/users/register" method="post" role="form" style="display: none">
                                 <div class="form-group">
                                     <input type="text" name="fullname" id="fullname" tabindex="1" class="form-control"
-                                        placeholder="Fullname" value="">
+                                        placeholder="Fullname" value="" />
                                 </div>
                                 <div class="form-group">
                                     <input type="text" name="username" id="username" tabindex="1" class="form-control"
-                                        placeholder="Username" value="">
+                                        placeholder="Username" value="" />
                                 </div>
                                 <div class="form-group">
                                     <input type="email" name="email" id="email" tabindex="1" class="form-control"
-                                        placeholder="Email Address" value="">
+                                        placeholder="Email Address" value="" />
                                 </div>
                                 <div class="form-group">
                                     <input type="password" name="password" id="password" tabindex="2"
-                                        class="form-control" placeholder="Password">
+                                        class="form-control" placeholder="Password" />
                                 </div>
                                 <div class="form-group">
                                     <input type="password" name="confirm-password" id="confirm-password" tabindex="2"
-                                        class="form-control" placeholder="Confirm Password">
+                                        class="form-control" placeholder="Confirm Password" />
+                                </div>
+                                <div class="form-group">
+                                    <!-- <input type="role"  -->
+                                    <!-- class="form-control" placeholder=""> -->
+                                    <select name="role" id="role"  class="form-control" placeholder="role">
+                                        <option value="admin" tabindex="2">admin</option>
+                                        <option value="user" tabindex="2">user</option>
+                                        <br/>
+                                    </select>
                                 </div>
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-sm-6 col-sm-offset-3">
                                             <input type="submit" name="register-submit" id="register-submit"
-                                                tabindex="4" class="form-control btn btn-register" value="Register Now">
+                                                tabindex="4" class="form-control btn btn-register"
+                                                value="Register Now" />
                                         </div>
                                     </div>
                                 </div>

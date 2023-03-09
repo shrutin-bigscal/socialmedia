@@ -11,17 +11,17 @@ const verifyJWT = (req, res, next) => {
         token,
         process.env.ACCESS_TOKEN_SECRET,
         (err, decoded) => {
-            if (err){
+            if (err) {
                 return res.json({
-                    message:"you must log in or unauthorize"
+                    message: "you must log in or unauthorize"
                 })
-            } 
-             //invalid token
+            }
+            //invalid token
             req.user = decoded.userinfo.username;
             req.role = decoded.userinfo.role;
             next();
         }
-        );
+    );
 }
 
 module.exports = verifyJWT 

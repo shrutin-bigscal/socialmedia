@@ -14,7 +14,7 @@ function randomString() {
 const file = multer({
     storage: multer.diskStorage({
         destination: (req, file, cd) => {
-            cd(null,'./file');
+            cd(null, './file');
         },
         filename: (req, file, cd) => {
             // console.log(file)

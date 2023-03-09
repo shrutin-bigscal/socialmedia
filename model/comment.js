@@ -1,34 +1,35 @@
-const mongoose= require('mongoose');
+const mongoose = require('mongoose');
 
-const comment = new mongoose.Schema (
+const comment = new mongoose.Schema(
     {
-        user:{
-            type: mongoose.Schema.Types.ObjectId, 
+        user: {
+            type: mongoose.Schema.Types.ObjectId,
             ref: 'user'
         },
-        post:{
-            type: mongoose.Schema.Types.ObjectId, 
+        post: {
+            type: mongoose.Schema.Types.ObjectId,
             ref: 'post'
         },
-        desc:{
-            type:String,
-            required:true
+        desc: {
+            type: String,
+            required: true
         },
-        createdAtDate:{
-            type:Date,
+        createdAtDate: {
+            type: Date,
             default: () => Date.now()
         },
-        updatedAt:{
-            type:Date
+        updatedAt: {
+            type: Date
         },
-        isDeleted:{
-            type:Boolean
+        isDeleted: {
+            type: Boolean
         },
-        deletedAt:{
-            type:Date
+        deletedAt: {
+            type: Date
         },
-        deletedBy:{
-            type:Date
+        deletedBy: {
+            type: Date,
+            default:false
         },
         // role:{
         //     type:String
@@ -36,4 +37,4 @@ const comment = new mongoose.Schema (
     }
 )
 
-module.exports = new mongoose.model('comment',comment);
+module.exports = new mongoose.model('comment', comment);

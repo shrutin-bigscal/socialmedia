@@ -9,18 +9,18 @@ const file = require('../middleware/fileupload')
 const verifyJWT = require('../middleware/verifyjwt')
 const validateuser = require('../validation');
 const bodyParser = require('body-parser');
-router.use(bodyParser.urlencoded({extended:true}))
-router.use(express.urlencoded({extended:true}))
+router.use(bodyParser.urlencoded({ extended: true }))
+router.use(express.urlencoded({ extended: true }))
 
 //add post 
-router.get('/add',verifyJWT,async(req,res)=>{
+router.get('/add', verifyJWT, async (req, res) => {
     res.render('postadd.ejs');
 })
 
-router.post('/add',verifyJWT,file.single('photo'),async(req,res)=>{
+router.post('/add', verifyJWT, file.single('photo'), async (req, res) => {
 
-    const userid = await user.findOne({username:req.user}) 
-    const { id } = userid 
+    const userid = await user.findOne({ username: req.user })
+    const { id } = userid
     console.log(id)
     try {
         console.log(req.body)

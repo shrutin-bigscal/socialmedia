@@ -7,25 +7,23 @@ app.use(cookieParser())
 const user = require('./router/user')
 const posts = require('./router/posts')
 const post = require('./model/post')
-app.set("view engine","ejs")
-app.use(express.urlencoded({extended:false}))
+app.set("view engine", "ejs")
+app.use(express.urlencoded({ extended: false }))
 
 
-app.use("/users",user);
-app.use("/posts",posts);
+app.use("/users", user);
+app.use("/posts", posts);
 
 
 
 app.get('/posts', (req, res) => {
-    try{
-
+    try {
         const allpost = post.find()
-        res.render('index.ejs',{ post:allpost })
+        res.render('index.ejs', { post: allpost })
     }
-    catch(err)
-    {
+    catch (err) {
         console.log(err)
     }
 })
 
-app.listen(process.env.PORT || 3030 )
+app.listen(process.env.PORT || 3030)

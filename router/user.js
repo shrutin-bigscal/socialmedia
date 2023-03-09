@@ -3,13 +3,12 @@ require('dotenv').config()
 const express = require('express')
 const router = express.Router()
 const user = require('../model/user');
+const post = require('../model/post')
 const bcrypt = require("bcrypt");
 const jwt = require('jsonwebtoken')
-// const role = require('../helper/role')
 const role = require('../model/role')
 const verifyRoles = require('../middleware/verifyroles')
 const verifyJWT = require('../middleware/verifyjwt')
-const validateuser = require('../validation');
 const { access } = require('fs');
 
 router.get('/login', async (req, res) => {
@@ -23,7 +22,7 @@ router.post('/login', async (req, res) => {
 
     const username = req.body.username
     const password = req.body.password
-    const founduser = await user.findOne({ username: username }).populate('role')
+    const founduser = await user.findOne({ username: username })
     if (!founduser) {
         return res.status(404).json({
             message: "Username is not found. Invalid login credentials.",
@@ -37,32 +36,27 @@ router.post('/login', async (req, res) => {
             success: false
         });
     }
-    const access_token = jwt.sign({ 'userinfo': { 'username': founduser.username, 'password': founduser.password, 'role': founduser.role.role } }, process.env.ACCESS_TOKEN_SECRET)
-    // // res.cookie("access_token", access_token, {
-    // //   httpOnly: true,
-    // // }).redirect('/users') 
-    res.json({Bearer : access_token})
-
-
+    const access_token = jwt.sign({ 'userinfo': { 'username': founduser.username, 'password': founduser.password, 'role': founduser.role } }, process.env.ACCESS_TOKEN_SECRET)
+    res.cookie("access_token", access_token, {
+        httpOnly: true,
+    })
+    res.redirect('/users')
 })
 
-router.get('/edit',verifyJWT,verifyRoles(user),(req, res) => {  
+router.get('/edit', verifyJWT, (req, res) => {
     res.send('hello world')
 })
 
-router.get('/',(req,res)=>{
-    res.sendStatus(200)
-})
 router.post('/register', async (req, res) => {
 
-    var valid;
-    let u = await user.find({ username: req.body.username });
-    for (let a in u) {
-        valid = (u[a].username == req.body.username)
-        return valid
-    }
-    if (!valid) {
-        try {
+    try {
+        var valid;
+        let u = await user.find({ username: req.body.username });
+        for (let a in u) {
+            valid = (u[a].username == req.body.username)
+            return valid
+        }
+        if (!valid) {
             const password = await bcrypt.hash(req.body.password, 10)
             const U = new user();
             U.fullname = req.body.fullname;
@@ -73,12 +67,20 @@ router.post('/register', async (req, res) => {
             console.log(U)
             await U.save();
             res.redirect('/users/login')
-        } catch (err) {
-            res.send("err" + err)
         }
-    }
-    else {
-        res.send('username teken')
+        else {
+            res.send('username taken')
+        }
+    } catch (err) {
+        res.send("err" + err)
     }
 })
+
+
+router.get('/logout', function (req, res) {
+    res.clearCookie('access_token');
+    res.redirect('/users/login');
+});
+
+
 module.exports = router

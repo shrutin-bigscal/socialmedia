@@ -19,6 +19,9 @@ const post = new mongoose.Schema (
             type: mongoose.Schema.Types.ObjectId, 
             ref: 'comment'
         },
+        photo:{
+            type:String,
+        },
         createdAtDate:{
             type:Date,
             default: () => Date.now()

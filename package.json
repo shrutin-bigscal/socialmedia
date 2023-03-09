@@ -24,6 +24,8 @@
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^7.0.0",
     "multer": "^1.4.5-lts.1",
-    "path": "^0.12.7"
+    "path": "^0.12.7",
+    "xhr2": "^0.2.1",
+    "xmlhttprequest": "^1.8.0"
   }
 }

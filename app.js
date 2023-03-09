@@ -1,16 +1,31 @@
 require('./db/conn')
 require('dotenv').config()
-const role = require('./helper/role')
-const auth = require('./helper/auth')
 const express = require('express')
 const app = express()
 const cookieParser = require('cookie-parser')
 app.use(cookieParser())
 const user = require('./router/user')
+const posts = require('./router/posts')
+const post = require('./model/post')
 app.set("view engine","ejs")
 app.use(express.urlencoded({extended:false}))
-// app.use(express.json)
-// app.use("/api/auth", authRoute);
+
+
 app.use("/users",user);
-// app.use("/api/posts", postRoute);
+app.use("/posts",posts);
+
+
+
+app.get('/posts', (req, res) => {
+    try{
+
+        const allpost = post.find()
+        res.render('index.ejs',{ post:allpost })
+    }
+    catch(err)
+    {
+        console.log(err)
+    }
+})
+
 app.listen(process.env.PORT || 3030 )

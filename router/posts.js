@@ -12,11 +12,6 @@ const bodyParser = require('body-parser');
 router.use(bodyParser.urlencoded({extended:true}))
 router.use(express.urlencoded({extended:true}))
 
-//allposts
-
-
-
-
 //add post 
 router.get('/add',verifyJWT,async(req,res)=>{
     res.render('postadd.ejs');

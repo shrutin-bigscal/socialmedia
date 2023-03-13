@@ -80,7 +80,7 @@ router.post('/register', async (req, res) => {
 //update user details
 router.get('/edit', verifyJWT, async (req, res) => {
 
-    const founduser = await user.findOne({ username: req.user })    
+    const founduser = await user.findOne({ username: req.user })
     res.render('edituser', { user: founduser })
 
 })
@@ -90,13 +90,12 @@ router.post('/edit', verifyJWT, async (req, res) => {
     const userid = await user.findOne({ username: req.user })
     const { id } = userid
     console.log(id)
-    if(founduser === null)
-    {   
-            console.log(req.body)
-            await user.findByIdAndUpdate({_id:id},req.body,{new:true})
-            res.redirect('/posts')
+    if (founduser === null) {
+        console.log(req.body)
+        await user.findByIdAndUpdate({ _id: id }, req.body, { new: true })
+        res.redirect('/posts')
     }
-    else{
+    else {
         // alert('username taken')
         console.log('username taken')
         res.redirect('/posts')

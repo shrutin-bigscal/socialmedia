@@ -6,6 +6,7 @@ const cookieParser = require('cookie-parser')
 app.use(cookieParser())
 const user = require('./router/user')
 const posts = require('./router/posts')
+
 const post = require('./model/post')
 const verifyJWT = require('./middleware/verifyjwt')
 app.set("view engine", "ejs")
@@ -14,6 +15,7 @@ app.use(express.urlencoded({ extended: false }))
 
 app.use("/users", user);
 app.use("/posts", posts);
+// app.use("/comment", comment);
 
 
 // app.use(express.static(path.join(__dirname, "file")));

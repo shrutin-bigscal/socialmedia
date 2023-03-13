@@ -103,7 +103,7 @@
 <body>
 
   <header>
-    <div class="bg-dark collapse" id="navbarHeader" >
+    <div class="bg-dark collapse" id="navbarHeader">
       <div class="container">
         <div class="row">
           <div class="col-sm-8 col-md-7 py-4">
@@ -140,20 +140,11 @@
 
   <main>
     <div class="container">
-
       <div class="nav-scroller py-1 mb-2">
         <nav class="nav d-flex justify-content-between">
           <a class="p-2 link-secondary" href="/posts/add">add post</a>
           <a class="p-2 link-secondary" href="/users/logout">logout</a>
           <a class="p-2 link-secondary" href="/posts/mypost">my posts</a>
-          <!-- <a class="p-2 link-secondary" href="#">Design</a>
-          <a class="p-2 link-secondary" href="#">Culture</a>
-          <a class="p-2 link-secondary" href="#">Business</a>
-          <a class="p-2 link-secondary" href="#">Politics</a>
-          <a class="p-2 link-secondary" href="#">Opinion</a>
-          <a class="p-2 link-secondary" href="#">Science</a>
-          <a class="p-2 link-secondary" href="#">Health</a>
-          <a class="p-2 link-secondary" href="#">Style</a> -->
           <a class="p-2 link-secondary" href="/users/edit">Edit Profile</a>
         </nav>
       </div>
@@ -161,33 +152,40 @@
     <div class="album py-5 bg-light">
       <div class="container">
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-          <% for (let a in post) {
-            %>
-            <div class="col">
-              <div class="card shadow-sm">
-                <small class="text-muted"></small>
-                <style>
-                  img {
-                    padding-top: 10px;
-                    padding-right: 10px;
-                    padding-bottom: 10px;
-                    padding-left: 10px;
-                    height: 250px;
-                    width: 350px;
-                  }
-                  </style>
-                <img src="<%= post[a].photo %>" >
-                <div class="card-body">
-                  <p class="card-text"><%= post[a].desc %></p>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
-                      <button type="button" class="btn btn-sm btn-outline-secondary"><a href="comment/<%= post[a]._id%>" style= "text-decoration:none;">View</a></button>
-                    </div>
+          <div class="col">
+            <div class="card shadow-sm">
+              <!-- <small class="text-muted"></small> -->
+              <!-- <svg class="bd-placeholder-img card-img-top" width="100%" height="225"
+                  xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail"
+                  preserveAspectRatio="xMidYMid slice" focusable="false">
+                  <title>Placeholder</title>
+                   <rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef"
+                     dy=".3em">Thumbnail</text>
+                    </svg> -->
+              <!-- <style>
+                img {
+                  padding-top: 10px;
+                  padding-right: 10px;
+                  padding-bottom: 10px;
+                  padding-left: 10px;
+                  height: 250px;
+                  width: 350px;
+                }
+              </style> -->
+              <%= console.log(post)%>
+              <img src="<%=post.photo%>" alt="" srcset="">
+              <div class="card-body">
+                <p class="card-text"></p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-sm btn-outline-secondary"><a href=""
+                        style="text-decoration:none;">View</a></button>
                   </div>
                 </div>
               </div>
             </div>
-            <% }%>
+          </div>
+
         </div>
       </div>
     </div>
@@ -199,8 +197,8 @@
         <a href="#">Back to top</a>
       </p>
       <!-- <p class="mb-1">Album example is © Bootstrap, but please download and customize it for yourself!</p>
-      <p class="mb-0">New to Bootstrap? <a href="/">Visit the homepage</a> or read our <a
-          href="/docs/5.3/getting-started/introduction/">getting started guide</a>.</p> -->
+       <p class="mb-0">New to Bootstrap? <a href="/">Visit the homepage</a> or read our <a
+           href="/docs/5.3/getting-started/introduction/">getting started guide</a>.</p> -->
     </div>
   </footer>
 

@@ -1,5 +1,30 @@
 const mongoose= require('mongoose');
 
+
+
+const comment = new mongoose.Schema({
+    user:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'user'
+    },
+    comment:{
+        type:String
+    },
+    isDeleted:{
+        type:Boolean,
+        default:false
+    },
+    deletedBy:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:" user"
+    },
+    deletedAt:{
+        type:Date,
+        default:false
+    }
+},{timestamps:true})
+
+
 const post = new mongoose.Schema (
     {
         title:{
@@ -16,8 +41,8 @@ const post = new mongoose.Schema (
             trim:true,
         },
         comment:{
-            type: mongoose.Schema.Types.ObjectId, 
-            ref: 'comment'
+            type: [comment], 
+            default:null
         },
         photo:{
             type:String,
@@ -27,17 +52,21 @@ const post = new mongoose.Schema (
             default: () => Date.now()
         },
         updatedAt:{
-            type:Date
+            type:Date,
+            default: null
         },
         isDeleted:{
             type:Boolean,
             default:false
         },
         deletedAt:{
-            type:Date
+            type:Date,
+            default: null
         },
         deletedBy:{
-            type:Date
+            type: mongoose.Types.ObjectId,
+            ref: 'user',
+            default: null
         }
     }
 )

@@ -14,6 +14,17 @@ const fs = require('fs')
 router.use(bodyParser.urlencoded({ extended: true }))
 router.use(express.urlencoded({ extended: true }))
 
+
+//
+router.get('/comment/:id',async(req,res)=>{
+    const id = req.params.id
+    const foundpost = await post.findOne({_id:id})
+    // console.log(foundpost)
+    res.render('viewco.ejs',{post:foundpost})
+})
+
+
+
 //add post 
 router.get('/add', verifyJWT, async (req, res) => {
     res.render('postadd.ejs');
@@ -80,36 +91,33 @@ router.get('/mypost', verifyJWT, async (req, res) => {
 //edit my post
 router.get('/edit/:id', verifyJWT, async (req, res) => {
 
-    const foundpost = await post.findOne({ _id: req.params.id })   
-    const file = path.join(directoryPath,foundpost.photo)
+    const foundpost = await post.findOne({ _id: req.params.id })
+    const file = path.join(directoryPath, foundpost.photo)
     // console.log(foundpost)
-    res.render('editpost', { post : foundpost ,photo :file,id :req.params.id})
+    res.render('editpost', { post: foundpost, photo: file, id: req.params.id })
 
 })
-router.post('/edit/:id', verifyJWT,file.single('photo'),async (req, res) => {
+router.post('/edit/:id', verifyJWT, file.single('photo'), async (req, res) => {
 
-    try{
-    const foundpost = await post.findOne({ _id: req.params.id })   
-    const file = foundpost.photo
-    if(!req.file)
-    {
-        console.log('hear')
-        const newvalue = {$set:{titile:req.body.title,desc:req.body.desc,photo:file}}
-        await post.updateOne({_id:req.params.id},newvalue)
-        res.redirect('/posts')
-    }   
-    else
-    {
-        console.log('there')
-        const newvalue = {$set:{titile:req.body.title,desc:req.body.desc,photo:req.file.filename}}
-        await post.updateOne({_id:req.params.id},newvalue)
-        res.redirect('/posts')      
+    try {
+        const foundpost = await post.findOne({ _id: req.params.id })
+        const file = foundpost.photo
+        if (!req.file) {
+            console.log('hear')
+            const newvalue = { $set: { titile: req.body.title, desc: req.body.desc, photo: file } }
+            await post.updateOne({ _id: req.params.id }, newvalue)
+            res.redirect('/posts')
+        }
+        else {
+            console.log('there')
+            const newvalue = { $set: { titile: req.body.title, desc: req.body.desc, photo: req.file.filename } }
+            await post.updateOne({ _id: req.params.id }, newvalue)
+            res.redirect('/posts')
+        }
     }
-    }
-    catch(err)
-    {
+    catch (err) {
         console.log(err)
-    }   
+    }
 })
 
 
@@ -135,6 +143,5 @@ router.get('/delete/:id', async (req, res) => {
         });
     }
 })
-
 
 module.exports = router;

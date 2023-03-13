@@ -31,9 +31,6 @@ const comment = new mongoose.Schema(
             type: Date,
             default:false
         },
-        // role:{
-        //     type:String
-        // }
     }
 )
 

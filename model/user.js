@@ -24,7 +24,6 @@ const user = new mongoose.Schema(
         // },       
         password: {
             type: String,
-            required: true
         },
         post: {
             type: mongoose.Schema.Types.ObjectId,
@@ -38,11 +37,11 @@ const user = new mongoose.Schema(
             type: Date
         },
         isDeleted: {
-            type: Boolean
+            type: Boolean,
+            default:false
         },
         deletedAt: {
-            type: Date,
-            default:false
+            type: Date
         },
         deletedBy: {
             type: Date

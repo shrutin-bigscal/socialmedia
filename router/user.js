@@ -18,6 +18,8 @@ router.get('/login', async (req, res) => {
 })
 
 
+
+//login user
 router.post('/login', async (req, res) => {
 
     const username = req.body.username
@@ -40,15 +42,12 @@ router.post('/login', async (req, res) => {
     res.cookie("access_token", access_token, {
         httpOnly: true,
     })
-    res.redirect('/users')
+    res.redirect('/posts')
 })
 
-router.get('/edit', verifyJWT, (req, res) => {
-    res.send('hello world')
-})
 
+//register user 
 router.post('/register', async (req, res) => {
-
     try {
         var valid;
         let u = await user.find({ username: req.body.username });
@@ -77,9 +76,43 @@ router.post('/register', async (req, res) => {
 })
 
 
+
+//update user details
+router.get('/edit', verifyJWT, async (req, res) => {
+
+    const founduser = await user.findOne({ username: req.user })    
+    res.render('edituser', { user: founduser })
+
+})
+router.post('/edit', verifyJWT, async (req, res) => {
+
+    const founduser = await user.findOne({ username: req.body.username })
+    const userid = await user.findOne({ username: req.user })
+    const { id } = userid
+    console.log(id)
+    if(founduser === null)
+    {   
+            console.log(req.body)
+            await user.findByIdAndUpdate({_id:id},req.body,{new:true})
+            res.redirect('/posts')
+    }
+    else{
+        // alert('username taken')
+        console.log('username taken')
+        res.redirect('/posts')
+    }
+})
+
+
+//logout user
 router.get('/logout', function (req, res) {
-    res.clearCookie('access_token');
-    res.redirect('/users/login');
+    try {
+        res.clearCookie('access_token');
+        res.redirect('/users/login');
+    }
+    catch (err) {
+        console.log(err)
+    }
 });
 
 

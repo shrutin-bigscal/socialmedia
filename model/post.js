@@ -6,15 +6,15 @@ const Comment = new mongoose.Schema({
         ref:'user'
     },
     comment:{
-        type:String
+        type:String,
     },
     isDeleted:{
         type:Boolean,
-        default:false
+        default:false,
     },
     deletedBy:{
         type:mongoose.Schema.Types.ObjectId,
-        ref:" user"
+        ref:" user",
     },
     deletedAt:{
         type:Date,

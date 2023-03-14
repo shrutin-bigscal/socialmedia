@@ -140,29 +140,33 @@
 
   <main>
     <div class="container">
+
       <div class="nav-scroller py-1 mb-2">
         <nav class="nav d-flex justify-content-between">
           <a class="p-2 link-secondary" href="/posts/add">add post</a>
           <a class="p-2 link-secondary" href="/users/logout">logout</a>
           <a class="p-2 link-secondary" href="/posts/mypost">my posts</a>
+          <!-- <a class="p-2 link-secondary" href="#">Design</a>
+           <a class="p-2 link-secondary" href="#">Culture</a>
+           <a class="p-2 link-secondary" href="#">Business</a>
+           <a class="p-2 link-secondary" href="#">Politics</a>
+           <a class="p-2 link-secondary" href="#">Opinion</a>
+           <a class="p-2 link-secondary" href="#">Science</a>
+           <a class="p-2 link-secondary" href="#">Health</a>
+           <a class="p-2 link-secondary" href="#">Style</a> -->
           <a class="p-2 link-secondary" href="/users/edit">Edit Profile</a>
         </nav>
       </div>
     </div>
     <div class="album py-5 bg-light">
       <div class="container">
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-          <div class="col">
+        <div class="row mb-2">
+          <div class="col-md-6">
             <div class="card shadow-sm">
-              <!-- <small class="text-muted"></small> -->
-              <!-- <svg class="bd-placeholder-img card-img-top" width="100%" height="225"
-                  xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail"
-                  preserveAspectRatio="xMidYMid slice" focusable="false">
-                  <title>Placeholder</title>
-                   <rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef"
-                     dy=".3em">Thumbnail</text>
-                    </svg> -->
-              <!-- <style>
+              <small class="text-muted">
+                <%=post.title%>
+              </small>
+              <style>
                 img {
                   padding-top: 10px;
                   padding-right: 10px;
@@ -171,25 +175,47 @@
                   height: 250px;
                   width: 350px;
                 }
-              </style> -->
-              <%= console.log(post)%>
-              <img src="<%=post.photo%>" alt="" srcset="">
+              </style>
+              <img src="<%= post.photo %>">
               <div class="card-body">
-                <p class="card-text"></p>
-                <div class="d-flex justify-content-between align-items-center">
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-sm btn-outline-secondary"><a href=""
-                        style="text-decoration:none;">View</a></button>
+                <p class="card-text">
+                  <%= post.desc %>
+                </p>
+                <form action="/comment/<%=post._id%>" method="post">
+                  <label>add comment</label><br>
+                  <div class="row">
+                    <div class="col-md-6 mb-4">
+                      <div class="form-outline">
+                        <textarea class="form-control form-control-lg" name="comment">
+                              </textarea>
+                        <label class="form-label" for="lastName">Comment</label>
+                      </div>
+                    </div>
                   </div>
+                  <input class="btn btn-primary btn-lg" type="submit" value="Add" />
+              </div>
+              </form>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
                 </div>
               </div>
             </div>
           </div>
-
+          <div class="col-md-6">
+            <h3>Comments</h3>
+            <div class="card shadow-sm">
+              <%- include('comment',{post:post}) -%>
+            </div>
+          </div>
         </div>
       </div>
     </div>
+    </div>
+    </div>
   </main>
+  <iframe>
+
+  </iframe>
 
   <footer class="text-muted py-5">
     <div class="container">

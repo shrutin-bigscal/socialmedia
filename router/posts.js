@@ -13,16 +13,7 @@ const path = require('path')
 const fs = require('fs')
 router.use(bodyParser.urlencoded({ extended: true }))
 router.use(express.urlencoded({ extended: true }))
-
-
-//
-router.get('/comment/:id',async(req,res)=>{
-    const id = req.params.id
-    const foundpost = await post.findOne({_id:id})
-    // console.log(foundpost)
-    res.render('viewco.ejs',{post:foundpost})
-})
-
+router.use(express.static(path.join(__dirname, "../file")));
 
 
 //add post 
@@ -49,7 +40,6 @@ router.post('/add', verifyJWT, file.single('photo'), async (req, res) => {
 })
 
 //show
-router.use(express.static(path.join(__dirname, "../file")));
 const directoryPath = path.join(__dirname, "../file/");
 router.get('/show/:id', verifyJWT, async (req, res) => {
     try {

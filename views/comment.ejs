@@ -1,0 +1,15 @@
+<div class="card-body">
+    
+    <%for (let a in post.postComment){%>
+    <p class="card-text">
+        <small class="text-muted">
+            <%= post.postComment[a].user.username %><br>
+        </small>   
+        <%= post.postComment[a].comment %>
+    </p>
+    <%}%>
+    <div class="d-flex justify-content-between align-items-center">
+        <div class="btn-group">
+        </div>
+    </div>
+</div>
